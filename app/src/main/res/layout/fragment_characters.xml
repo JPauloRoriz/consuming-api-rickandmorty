@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rick_and_morty"
-        android:layout_marginTop="@dimen/dimen_4"
+        android:layout_marginTop="@dimen/dimen_5"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -36,8 +36,8 @@
         android:id="@+id/searchview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="@dimen/dimen_2"
+        android:layout_marginTop="@dimen/dimen_2"
         android:background="@drawable/shape_round_white"
         app:layout_constraintTop_toBottomOf="@+id/tv_subtitle" />
 
@@ -45,7 +45,7 @@
         android:id="@+id/tv_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="@dimen/dimen_2"
         android:layout_marginTop="@dimen/dimen_2"
         android:text="@string/lista_rick_and_morty"
         android:textColor="@color/white"
@@ -55,7 +55,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_characters"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="@dimen/dimen_3"
         app:layout_constraintVertical_bias="0"
         android:layout_marginTop="@dimen/dimen_2"
         android:layout_height="wrap_content"
