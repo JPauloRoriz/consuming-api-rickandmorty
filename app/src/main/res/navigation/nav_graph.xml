@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.joaop.rickandmorty.ui.fragments.MenuFragment"
+        android:name="com.joaop.rickandmorty.ui.fragments.CharactersFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_characters" />
 </navigation>

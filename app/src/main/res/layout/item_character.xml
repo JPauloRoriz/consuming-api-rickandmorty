@@ -7,10 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_character"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        tools:layout_height="200dp"
+        android:scaleType="fitXY"
         tools:src="@tools:sample/backgrounds/scenic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
