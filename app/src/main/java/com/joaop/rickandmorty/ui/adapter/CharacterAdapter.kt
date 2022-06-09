@@ -51,7 +51,7 @@ class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterViewHo
             }
 
             override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
-                return oldItem.name == newItem.name
+                return oldItem == newItem
             }
         }
     }
