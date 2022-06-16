@@ -2,9 +2,11 @@ package com.joaop.rickandmorty.data.callback
 
 import com.joaop.rickandmorty.data.exceptions.ErrorCallException
 import com.joaop.rickandmorty.data.exceptions.ErrorException
+import com.joaop.rickandmorty.data.exceptions.WithoutInternetException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 
 
 fun <TResponse, T> Call<TResponse>.makeCall(
@@ -29,7 +31,11 @@ fun <TResponse, T> Call<TResponse>.makeCall(
             call: Call<TResponse>,
             t: Throwable
         ) {
-            listener.onError(ErrorCallException(t.message))
+            if (t is IOException) {
+                listener.onError(WithoutInternetException())
+            } else {
+                listener.onError(ErrorCallException(t.message))
+            }
         }
     })
 }

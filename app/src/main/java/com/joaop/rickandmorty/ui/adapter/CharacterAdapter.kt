@@ -1,17 +1,15 @@
 package com.joaop.rickandmorty.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.joaop.rickandmorty.databinding.ItemCharacterBinding
 import com.joaop.rickandmorty.domain.entity.Character
-import com.joaop.rickandmorty.ui.extension.loadFromUrl
+import com.joaop.rickandmorty.ui.adapter.viewholder.CharacterViewHolder
 
 
-class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterViewHolder>(COMPARATOR) {
+class CharacterAdapter : ListAdapter<Character, CharacterViewHolder>(COMPARATOR) {
     var clickDetail: ((Character) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
@@ -21,26 +19,17 @@ class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterViewHo
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position], clickDetail)
     }
 
-    override fun getItemCount() = currentList.size
+    override fun getItemCount(): Int {
+        return currentList.size
+    }
 
-    inner class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding: ItemCharacterBinding by lazy {
-            ItemCharacterBinding.bind(itemView)
-        }
 
-        fun bind(character: Character) {
-            with(binding) {
-                btnDetail.setOnClickListener {
-                    clickDetail?.invoke(character)
-                }
-                imgCharacter.loadFromUrl(character.image)
-                titleCharacter.text = character.name
-                subtitleCharacter.text = character.species
-
-            }
+    override fun submitList(list: List<Character>?) {
+        list?.toMutableList()?.let {
+            super.submitList(ArrayList(it))
         }
     }
 
@@ -55,5 +44,4 @@ class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterViewHo
             }
         }
     }
-
 }

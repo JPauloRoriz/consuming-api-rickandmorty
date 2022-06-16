@@ -8,4 +8,7 @@
     <string name="see_detail">Ver detalhes</string>
     <string name="description_character">"%s \n %s"</string>
     <string name="search_hint">Faça sua busca</string>
+    <string name="message_error_internet">Não foi possível completar essa operação, por favor, cheque sua conexão com a internet.</string>
+    <string name="tv_specie">Espécie:</string>
+    <string name="gender">Gênero</string>
 </resources>

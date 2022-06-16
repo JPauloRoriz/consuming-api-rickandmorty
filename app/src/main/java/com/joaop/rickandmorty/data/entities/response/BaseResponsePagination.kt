@@ -1,6 +1,6 @@
 package com.joaop.rickandmorty.data.entities.response
 
-data class BaseResponse<T>(
+data class BaseResponsePagination<T>(
     val info: InfoResponse,
     val results: T
 )

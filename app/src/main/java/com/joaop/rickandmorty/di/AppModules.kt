@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 val appModule = module {
 
     //ViewModel
-    viewModel { CharacterViewModel(get()) }
+    viewModel { CharacterViewModel(get(), get()) }
 
     //Usecase
     factory { GetAllCharactersUseCase(get()) }

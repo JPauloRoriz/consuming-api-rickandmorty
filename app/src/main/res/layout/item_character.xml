@@ -1,65 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="@dimen/dimen_5"
-    android:background="@color/color_dark_light"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:outlineSpotShadowColor="@color/white"
+    app:cardBackgroundColor="@color/color_dark_light"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="6dp"
+    app:cardUseCompatPadding="true">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_character"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_height="200dp"
-        android:scaleType="fitXY"
-        tools:src="@tools:sample/backgrounds/scenic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title_character"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="@dimen/dimen_4"
-        android:gravity="start"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_h2"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/img_character"
-        tools:text="Rick" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_character"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_height="200dp"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/subtitle_character"
-        android:layout_width="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnDetail"
-        app:layout_constraintStart_toStartOf="@+id/title_character"
-        app:layout_constraintEnd_toEndOf="@+id/title_character"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_2"
-        android:gravity="start"
-        android:textColor="@color/color_gray_light"
-        android:textSize="@dimen/text_h3"
-        app:layout_constraintTop_toBottomOf="@+id/title_character"
-        tools:text="brancaCabeça brancaCabeça branca" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_character"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_4"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:gravity="start"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h2"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_character"
+            tools:text="Rick" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subtitle_character"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_2"
+            android:gravity="start"
+            android:textColor="@color/color_gray_light"
+            android:textSize="@dimen/text_h3"
+            app:layout_constraintBottom_toTopOf="@+id/btnDetail"
+            app:layout_constraintEnd_toEndOf="@+id/title_character"
+            app:layout_constraintStart_toStartOf="@+id/title_character"
+            app:layout_constraintTop_toBottomOf="@+id/title_character"
+            tools:text="brancaCabeça brancaCabeça branca" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDetail"
-        android:layout_marginStart="@dimen/dimen_5"
-        android:layout_marginTop="@dimen/dimen_5"
-        android:layout_marginBottom="@dimen/dimen_2"
-        android:text="@string/see_detail"
-        android:drawableEnd="@drawable/ic_arrow_right_white"
-        android:drawablePadding="@dimen/dimen_5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle_character"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/dimen_5"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:background="@drawable/selector_button"
+            android:layout_marginBottom="@dimen/dimen_2"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_arrow_right_white"
+            android:drawablePadding="@dimen/dimen_5"
+            android:focusable="true"
+            android:text="@string/see_detail"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subtitle_character"
+            app:layout_constraintVertical_bias="0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

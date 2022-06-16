@@ -6,14 +6,17 @@
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.115" />
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/drawable/ic_arrow_right_white.xml" value="0.1" />
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/drawable/ic_launcher_background.xml" value="0.115" />
+        <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/drawable/selector_button.xml" value="0.115" />
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/drawable/shape_round_white.xml" value="0.1" />
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/custom_detail.xml" value="0.203125" />
+        <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/custom_text_detail.xml" value="0.33" />
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/custom_toolbar.xml" value="0.203125" />
-        <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/fragment_characters.xml" value="0.15462962962962962" />
+        <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/fragment_characters.xml" value="0.25" />
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/fragment_detail_character.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/fragment_menu.xml" value="0.17889492753623187" />
-        <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/item_character.xml" value="0.2" />
+        <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/item_character.xml" value="0.22" />
+        <entry key="..\:/Users/joaop/AndroidStudioProjects/androidrickandmorty/app/src/main/res/layout/shimmer_list_character.xml" value="0.203125" />
       </map>
     </option>
   </component>

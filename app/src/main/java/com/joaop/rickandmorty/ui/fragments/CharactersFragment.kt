@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.NavController
+import com.google.android.material.snackbar.Snackbar
+import com.joaop.rickandmorty.R
 import com.joaop.rickandmorty.databinding.FragmentCharactersBinding
 import com.joaop.rickandmorty.ui.adapter.CharacterAdapter
 import com.joaop.rickandmorty.ui.extension.setOnFinsihScrollListener
+import com.joaop.rickandmorty.ui.extension.showLoadingLayout
 import com.joaop.rickandmorty.viewmodel.listCharacter.CharacterViewModel
+import com.joaop.rickandmorty.viewmodel.listCharacter.model.CharactersEvent
 import com.joaop.rickandmorty.viewmodel.listCharacter.model.CharactersState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,14 +38,21 @@ class CharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvCharacters.adapter = adapter
+
+        setupViews()
         setupListeners()
         setupObservers()
 
     }
 
+    private fun setupViews() {
+        binding.rvCharacters.adapter = adapter
+        binding.rvCharacters.setHasFixedSize(false)
+    }
+
     private fun setupListeners() {
         binding.swipeContainer.setOnRefreshListener {
+            binding.swipeContainer.isRefreshing = false
             viewModel.refreshList()
         }
 
@@ -48,26 +60,53 @@ class CharactersFragment : Fragment() {
             viewModel.refreshList(true)
         }
 
+        binding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { viewModel.refreshList(false, query) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
+
 
     }
 
     private fun setupObservers() {
         viewModel.stateLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is CharactersState.ShowLoading -> {
-                    binding.swipeContainer.isRefreshing = true
+                is CharactersState.ShowLoadingScreen -> {
+                    binding.rvCharacters.isVisible = !state.show
+                    binding.tvList.isVisible = !state.show
+                    binding.loadScreen.showLoadingLayout(state.show)
                 }
                 is CharactersState.OnSuccessList -> {
                     adapter.submitList(state.result)
                 }
-                is CharactersState.HideLoading -> {
-                    binding.swipeContainer.isRefreshing = false
-                }
                 is CharactersState.ShowLoadingPagination -> {
-                    binding.pbLoadingPagination.isVisible = state.show
+                    binding.loadPagination.showLoadingLayout(state.show)
+                }
+            }
+            viewModel.eventLiveData.observe(viewLifecycleOwner) { event ->
+                when (event) {
+                    is CharactersEvent.ShowAlertMessage -> {
+                        Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT).show()
+                    }
+                    is CharactersEvent.GoToDetail -> {
+
+                    }
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        binding.loadPagination.showLoadingLayout(false)
+        binding.loadScreen.showLoadingLayout(false)
+        super.onPause()
     }
 }
 
