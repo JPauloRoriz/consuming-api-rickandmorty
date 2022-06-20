@@ -10,9 +10,8 @@ interface CharacterApi {
 
     @GET("api/character/")
     fun getAllCharacters(
-        @Query("page") page : Int = 1,
-        @Query("name") name : String = ""
+        @Query("page") page : Int,
+        @Query("name") name : String? = null
     ): Call<BaseResponsePagination<List<CharacterResponse>>>
-
 
 }

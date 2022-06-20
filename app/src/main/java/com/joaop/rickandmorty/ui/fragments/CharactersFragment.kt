@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import com.google.android.material.snackbar.Snackbar
-import com.joaop.rickandmorty.R
 import com.joaop.rickandmorty.databinding.FragmentCharactersBinding
 import com.joaop.rickandmorty.ui.adapter.CharacterAdapter
 import com.joaop.rickandmorty.ui.extension.setOnFinsihScrollListener
@@ -53,16 +50,16 @@ class CharactersFragment : Fragment() {
     private fun setupListeners() {
         binding.swipeContainer.setOnRefreshListener {
             binding.swipeContainer.isRefreshing = false
-            viewModel.refreshList()
+            viewModel.refreshList(true)
         }
 
         binding.rvCharacters.setOnFinsihScrollListener {
-            viewModel.refreshList(true)
+            viewModel.refreshList(false)
         }
 
         binding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { viewModel.refreshList(false, query) }
+                query?.let { viewModel.getCharacterByQuery(query) }
                 return true
             }
 
@@ -97,6 +94,9 @@ class CharactersFragment : Fragment() {
                     }
                     is CharactersEvent.GoToDetail -> {
 
+                    }
+                    CharactersEvent.ScrollToTop -> {
+                        binding.rvCharacters.layoutManager?.scrollToPosition(0)
                     }
                 }
             }

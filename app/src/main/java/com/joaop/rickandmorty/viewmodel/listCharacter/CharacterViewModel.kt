@@ -1,7 +1,6 @@
 package com.joaop.rickandmorty.viewmodel.listCharacter
 
 import android.content.Context
-import android.view.View
 import androidx.lifecycle.ViewModel
 import com.joaop.rickandmorty.R
 import com.joaop.rickandmorty.data.callback.OnResultListener
@@ -15,42 +14,43 @@ import com.joaop.rickandmorty.viewmodel.livedata.MultipleLiveState
 import com.joaop.rickandmorty.viewmodel.livedata.SingleLiveEvent
 
 class CharacterViewModel(
-    private val getCharacterUseCase: GetAllCharactersUseCase,
+    private val getAllCharacterUseCase: GetAllCharactersUseCase,
     private val context: Context
 ) : ViewModel() {
     private var currentPage = 0
-    private var lastPage: Int? = null
+    private var queryFilter = ""
+    private var lastPage: Int = 2
     private val listCharacters = mutableListOf<Character>()
     val stateLiveData = MultipleLiveState<CharactersState>()
     val eventLiveData = SingleLiveEvent<CharactersEvent>()
 
     init {
-        refreshList()
+        refreshList(true)
     }
 
-    fun refreshList(pagination: Boolean = false, name: String = "") {
-        showLoading(pagination)
-        if (pagination) {
-            currentPage++
-        } else {
+    fun refreshList(resetList: Boolean = false) {
+        if (resetList) {
+            listCharacters.clear()
+            this.queryFilter = ""
             currentPage = 1
+        } else {
+            currentPage++
         }
-        if (lastPage == currentPage) {
+        if (currentPage >= lastPage) {
 
         } else {
-            getCharacterUseCase(
-                currentPage,
-                name,
-                object : OnResultListener<BaseResponsePagination<List<Character>>?> {
+            showLoading(resetList)
+            getAllCharacterUseCase(
+                page = currentPage,
+                name = queryFilter,
+                listener = object : OnResultListener<BaseResponsePagination<List<Character>>?> {
                     override fun onSuccess(result: BaseResponsePagination<List<Character>>?) {
-                        lastPage = result?.info?.pages
+                        result?.info?.pages?.let { lastPage = it }
                         result?.results?.let {
-                            if (!pagination) {
-                                listCharacters.clear()
-                            }
                             listCharacters.addAll(it)
                             CharactersState.OnSuccessList(listCharacters).run()
-                            hideLoading(pagination)
+                            hideLoading(resetList)
+                            if (resetList) CharactersEvent.ScrollToTop.run()
                         }
                     }
 
@@ -63,7 +63,7 @@ class CharacterViewModel(
                         } else {
                             CharactersEvent.ShowAlertMessage(exception.message.toString()).run()
                         }
-                        hideLoading(pagination)
+                        hideLoading(resetList)
                     }
                 }
             )
@@ -92,6 +92,14 @@ class CharacterViewModel(
 
     private fun CharactersState.run() {
         stateLiveData.setValue(this)
+    }
+
+    fun getCharacterByQuery(query: String) {
+        this.queryFilter = query
+        currentPage = 0
+        listCharacters.clear()
+        refreshList(resetList = false)
+
     }
 
 
